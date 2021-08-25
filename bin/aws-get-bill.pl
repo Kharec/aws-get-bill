@@ -7,10 +7,7 @@ our $VERSION = 0.1;
 
 my $ce   = Paws->service( 'CostExplorer', region => 'us-east-1' );
 my $date = DateTime->now();
-my $month;
-
-# ugly hack, $date->month is only one digit if < 10 and AWS want a double (like 08 for august)
-$date->month() < 10 ? $month = $date->month() : $month = "0" . $date->month();
+my $month = sprintf("%02d", $date->month());
 
 my $first_day = $date->year() . "-" . $month . "-" . "01";
 
